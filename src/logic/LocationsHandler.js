@@ -1,10 +1,19 @@
 import CONFIG from "../config";
 
+// This prevents 
+const headers = new Headers();
+headers.append('pragma', 'no-cache');
+headers.append('cache-control', 'no-cache');
+
+const options = {
+    method: "get",
+    headers: headers,
+}
 
 const Locations = {
     getLocation: (id) => {
         return new Promise((resolve, reject) => {
-            fetch(CONFIG.URL + CONFIG.BASE)
+            fetch(CONFIG.URL + CONFIG.BASE, options)
                 .then(response => response.json())
                 .then(data => {
                     for(var i = 0; i < data.locations.length; i++) {
